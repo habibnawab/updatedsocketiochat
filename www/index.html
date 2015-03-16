@@ -1,5 +1,5 @@
 <!Doctype html>
-<html>
+<!--html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
@@ -33,6 +33,71 @@
             });
         });
     </script>
-</body>
+</body-->
+<html>
 
+  <head>
+
+    <script src='//code.jquery.com/jquery-1.10.2.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="myStyle.css">
+  
+  </head>
+
+  <body>
+
+     <div id='gameOver'>
+
+      <center>
+
+        <h2>Game Over!</h2>
+
+        <form onSubmit='postStuff()'>
+            
+          <input type='submit' value="New Game" id='submitStuff' />
+
+        </form>
+
+      </center>
+
+    </div>
+
+    <div id='game'>
+
+      <p>
+        
+        <h2><label id='label_score'>Score</label></h2>
+        <h1 id='score'>0</h1>
+    </p>
+        <p>
+      <h2><label id='label_time'>Time</label></h2>
+      <h1 id='time'>10</h1>
+    </p>
+      <div id='target'></div>
+
+    </div>
+
+  </body>
+
+  <script>
+
+    setInterval(function(){if((parseInt(($('#time').text())-1)<0)) 
+                 {$('#game').animate({opacity:0.1},700);
+                  $('#gameOver').animate({opacity:1},1000);
+                  $('#gameOver').animate({opacity:1},1000);
+                  $('#formScore').val($('#score').text())}
+                           else{$('#time').text(parseInt($('#time').text())-1)}},1000); // Counts down timer and checks for lose
+
+    function position(object) {$(object).animate({left:(Math.round((Math.random()*($('body').width()-100))/50)*50)+50,top:(Math.round((Math.random()*    ($('body').height()-50))/50)*50)},300)} //Declares function which sets random position of given object.  
+
+    position(document.getElementById('target'));
+
+    $('#target').click(function(){if(!(parseInt(($('#time').text())-1)<0)){position($('#target'));$('#score').text(parseInt($('#score').text())+1)}})
+
+    
+
+    function displayData(data) {$.each(data.split(','),function(i){if(i<50){if(data.split(',')[i].split(':')[1]!=undefined){$('#leaderboard').append("<div    class='scores'>"+data.split(',')[i].split(':')[0]+' - '+data.split(',')[i].split(':')[1]+"</div>")}}})}
+
+  </script>
+
+</html>
 </html>
